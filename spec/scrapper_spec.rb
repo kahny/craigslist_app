@@ -1,10 +1,10 @@
 require "./scrapper"
 
-describe "scrapper" do 
+describe "scrapper" do
 
   before(:each) do
     # use @doc in your tests to avoid hitting the
-    #   craigslist url, which would be slow and 
+    #   craigslist url, which would be slow and
     #   problematic if you were blocked
     @doc = Nokogiri::HTML(open("today.html"))
     @today = "Aug 12"
@@ -29,4 +29,16 @@ describe "scrapper" do
 
   describe "get_todays_rows" do
   end
+
+  describe "get_page_results" do
+    it "should returns the page's rows"
+    url = open("today.html").read
+    page = Nokogiri::HTML(url)
+    results = []
+    results = page.css(".row").map do |row|
+      row.content
+    end
+    expect(results).to eql(get_page_results)
+  end
+
 end
